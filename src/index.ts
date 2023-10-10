@@ -7,6 +7,9 @@ class Rectangle implements Area {
   area(): number {
     return this.width * this.height;
   }
+  toString() {
+    return `Rectangle(${this.x}, ${this.y}): ${this.width}x${this.height}`;
+  }
 }
 class Circle {
   constructor(public x: number, public y: number, public radius: number) {}
@@ -16,7 +19,9 @@ class Circle {
   }
 }
 
-const run = () => {};
+const run = () => {
+  console.log(`${new Rectangle(0, 0, 10, 10)}`);
+};
 
 run();
 // npx ts-node src/index.ts numbers

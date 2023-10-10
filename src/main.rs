@@ -1,6 +1,6 @@
-mod shapes;
+use crate::shapes::{area::Area, circle::Circle, rect::Rectangle};
 
-use shapes::{Area, Circle, Rectangle};
+mod shapes;
 
 trait Enlarge {
     fn enlarge(&mut self, multiple: f64);

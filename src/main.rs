@@ -14,19 +14,12 @@ impl Enlarge for Rectangle {
 }
 
 fn main() {
-    let mut rect = Rectangle {
-        x: 5.0,
-        y: 5.0,
-        width: 2.0,
-        height: 2.0,
-    };
-    let circ = Circle {
-        x: 0.0,
-        y: 0.0,
-        radius: 10.0,
-    };
+    let mut rect = Rectangle::default();
+    let circ = Circle::default();
 
+    println!("{}", rect);
     println!("{:?}", rect.area());
+    println!("{:?}", circ);
     println!("{:?}", circ.area());
     println!("{:?}", 4.2.area());
 

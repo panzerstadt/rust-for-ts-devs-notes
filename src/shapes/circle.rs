@@ -1,6 +1,7 @@
 use super::area::Area;
 use std::f64::consts::PI;
 
+#[derive(Default, Debug)]
 pub struct Circle {
     pub x: f64,
     pub y: f64,

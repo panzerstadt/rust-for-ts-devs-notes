@@ -1,8 +1,22 @@
-import * as fs from "fs";
+interface Area {
+  area(): number;
+}
 
-const run = async () => {
-  const file = await fs.readFileSync("src/lines", "utf-8");
-  file.split("\n").forEach((r) => console.log(r));
-};
+class Rectangle implements Area {
+  constructor(public x: number, public y: number, public width: number, public height: number) {}
+  area(): number {
+    return this.width * this.height;
+  }
+}
+class Circle {
+  constructor(public x: number, public y: number, public radius: number) {}
+
+  area(): number {
+    return this.radius * this.radius * Math.PI;
+  }
+}
+
+const run = () => {};
 
 run();
+// npx ts-node src/index.ts numbers

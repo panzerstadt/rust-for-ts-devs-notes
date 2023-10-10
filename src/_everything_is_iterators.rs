@@ -7,7 +7,5 @@ fn main() {
         .map(|(i, item)| (item, i)) // keys must be unique, so if you flip them, this means only the latest key will be kept (e.g. this: 6)
         .collect(); // this is the point where it 'executes' all the above code
 
-    println!("{:?}", foo);
+    println!("{:?}", foo); // {"kore": 4, "what": 0, "is": 5, "nani": 3, "this": 6}
 }
-
-// kinda like how flooent is structured, you turn everything into an iterator, you iterate on it, and then you collect them at the end

@@ -1,4 +1,7 @@
-use super::{area::Area, collisions::Collidable, rect::Rectangle};
+use super::{
+    area::Area,
+    collisions::{Contains, Points},
+};
 use std::f64::consts::PI;
 
 #[derive(Default, Debug)]
@@ -8,28 +11,17 @@ pub struct Circle {
     pub radius: f64,
 }
 
-impl Circle {
-    pub fn contains_point(&self, (x, y): (f64, f64)) -> bool {
+impl Contains for Circle {
+    fn contains_point(&self, (x, y): (f64, f64)) -> bool {
         let dx = self.x - x;
         let dy = self.y - y;
         return dx * dx + dy * dy <= self.radius * self.radius;
     }
 }
 
-impl Collidable<Rectangle> for Circle {
-    fn collide(&self, other: &Rectangle) -> bool {
-        for point in other {
-            if self.contains_point(point) {
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
-impl Collidable<Circle> for Circle {
-    fn collide(&self, other: &Circle) -> bool {
-        return self.contains_point((other.x, other.y));
+impl Points for Circle {
+    fn points(&self) -> super::collisions::PointIter {
+        return vec![(self.x, self.y)].into();
     }
 }
 

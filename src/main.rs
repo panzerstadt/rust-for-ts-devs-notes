@@ -1,4 +1,4 @@
-use crate::shapes::{area::Area, circle::Circle, rect::Rectangle};
+use crate::shapes::{area::Area, circle::Circle, collisions::Collidable, rect::Rectangle};
 
 mod shapes;
 
@@ -15,8 +15,15 @@ impl Enlarge for Rectangle {
 
 fn main() {
     let rect = Rectangle::default();
+    let rect2 = Rectangle::default();
+    let circle = Circle::default();
+    let circle2 = Circle::default();
 
-    for point in &rect {}
+    rect.collide(&rect2);
+    circle.collide(&circle2);
+
+    rect.collide(&circle);
+    circle.collide(&rect);
 
     println!("{}", rect)
 }

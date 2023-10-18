@@ -1,4 +1,4 @@
-use super::area::Area;
+use super::{area::Area, circle::Circle, collisions::Collidable};
 use std::fmt::Display;
 
 pub struct Rectangle {
@@ -6,6 +6,29 @@ pub struct Rectangle {
     pub y: f64,
     pub width: f64,
     pub height: f64,
+}
+
+impl Rectangle {
+    pub fn contains_point(&self, (x, y): (f64, f64)) -> bool {
+        return self.x <= x && self.x + self.width >= x && self.y <= y && self.y + self.height >= y;
+    }
+}
+
+impl Collidable<Rectangle> for Rectangle {
+    fn collide(&self, other: &Rectangle) -> bool {
+        for point in other {
+            if self.contains_point(point) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+impl Collidable<Circle> for Rectangle {
+    fn collide(&self, other: &Circle) -> bool {
+        return self.contains_point((other.x, other.y));
+    }
 }
 
 impl Area for Rectangle {

@@ -66,21 +66,29 @@ impl Iterator for RectIter {
     }
 }
 
+// refactor to reduce duplication
+impl RectIter {
+    // can be called anything you want, not just new()
+    fn new(rect: &Rectangle) -> Self {
+        return RectIter {
+            points: vec![
+                (rect.x, rect.y),
+                (rect.x + rect.width, rect.y),
+                (rect.x, rect.y + rect.height),
+                (rect.x + rect.width, rect.y + rect.height),
+            ],
+            idx: 0,
+        };
+    }
+}
+
 impl IntoIterator for Rectangle {
     type Item = (f64, f64);
 
     type IntoIter = RectIter;
 
     fn into_iter(self) -> Self::IntoIter {
-        return RectIter {
-            points: vec![
-                (self.x, self.y),
-                (self.x + self.width, self.y),
-                (self.x, self.y + self.height),
-                (self.x + self.width, self.y + self.height),
-            ],
-            idx: 0,
-        };
+        return RectIter::new(&self);
     }
 }
 
@@ -90,14 +98,6 @@ impl IntoIterator for &Rectangle {
     type IntoIter = RectIter;
 
     fn into_iter(self) -> Self::IntoIter {
-        return RectIter {
-            points: vec![
-                (self.x, self.y),
-                (self.x + self.width, self.y),
-                (self.x, self.y + self.height),
-                (self.x + self.width, self.y + self.height),
-            ],
-            idx: 0,
-        };
+        return RectIter::new(self);
     }
 }

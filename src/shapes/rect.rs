@@ -66,21 +66,36 @@ impl Iterator for RectIter {
     }
 }
 
-// refactor to reduce duplication
-impl RectIter {
-    // can be called anything you want, not just new()
-    fn new(rect: &Rectangle) -> Self {
+// v2 even better refactor, this is the From trait, a built-in trait
+impl From<&Rectangle> for RectIter {
+    fn from(value: &Rectangle) -> Self {
         return RectIter {
             points: vec![
-                (rect.x, rect.y),
-                (rect.x + rect.width, rect.y),
-                (rect.x, rect.y + rect.height),
-                (rect.x + rect.width, rect.y + rect.height),
+                (value.x, value.y),
+                (value.x + value.width, value.y),
+                (value.x, value.y + value.height),
+                (value.x + value.width, value.y + value.height),
             ],
             idx: 0,
         };
     }
 }
+
+// v1 refactor to reduce duplication
+// impl RectIter {
+//     // can be called anything you want, not just new()
+//     fn new(rect: &Rectangle) -> Self {
+//         return RectIter {
+//             points: vec![
+//                 (rect.x, rect.y),
+//                 (rect.x + rect.width, rect.y),
+//                 (rect.x, rect.y + rect.height),
+//                 (rect.x + rect.width, rect.y + rect.height),
+//             ],
+//             idx: 0,
+//         };
+//     }
+// }
 
 impl IntoIterator for Rectangle {
     type Item = (f64, f64);
@@ -88,7 +103,8 @@ impl IntoIterator for Rectangle {
     type IntoIter = RectIter;
 
     fn into_iter(self) -> Self::IntoIter {
-        return RectIter::new(&self);
+        // return RectIter::new(&self); // v1
+        return (&self).into(); // v2
     }
 }
 
@@ -98,6 +114,7 @@ impl IntoIterator for &Rectangle {
     type IntoIter = RectIter;
 
     fn into_iter(self) -> Self::IntoIter {
-        return RectIter::new(self);
+        // return RectIter::new(self); // v1
+        return self.into(); // v2
     }
 }

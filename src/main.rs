@@ -14,16 +14,9 @@ impl Enlarge for Rectangle {
 }
 
 fn main() {
-    let mut rect = Rectangle::default();
-    let circ = Circle::default();
+    let rect = Rectangle::default();
 
-    println!("{}", rect);
-    println!("{:?}", rect.area());
-    println!("{:?}", circ);
-    println!("{:?}", circ.area());
-    println!("{:?}", 4.2.area());
+    for point in &rect {}
 
-    rect.enlarge(2.0);
-
-    println!("{:?}", rect.area());
+    println!("{}", rect)
 }

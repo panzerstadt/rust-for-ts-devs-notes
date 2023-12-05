@@ -84,3 +84,10 @@ fn main() -> Result<()> {
 
     return Ok(());
 }
+
+/*
+next steps
+- cli, implement ls
+- websockets, learn about async rust
+- wasm, leptos (like solid.js)
+*/
